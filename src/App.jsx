@@ -1,13 +1,17 @@
-import Nav from "./components/Navbar"
+import Nav from "./components/Navbar/Navbar";
+import Main from "./components/Main/Main";
 
 
 
 const App = () => {
   return (
     <>
-     <div>
+     <div className="">
      <section id="Navbar">
         <Nav/>
+     </section>
+     <section>
+      <Main/>
      </section>
      </div>
     </>
