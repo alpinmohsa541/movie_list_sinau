@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 
 const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light fixed-top" style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 2 }}>
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <img
@@ -30,7 +30,7 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
         <div className="d-flex justify-content-center w-100 mt-2">
           <div className="d-flex align-items-center border rounded-2 border-2 border-black bg-transparent w-75">
             <input
-              className="bg-transparent text-black border-0 w-100 p-2 placeholder-white"
+              className="bg-transparent text-white border-0 w-100 p-2 placeholder-white"
               type="text"
               placeholder="What do you want to watch?"
               onChange={(e) => handleChangeSearch(e)}
@@ -38,23 +38,23 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
             <AiOutlineSearch
               onClick={() => onSubmitSearch()}
               size={25}
-              className="text-black hover:text-danger cursor-pointer ms-2"
+              className="text-white hover:text-danger cursor-pointer ms-2"
             />
           </div>
         </div>
 
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-link active me-3" aria-current="page" href="#">
-              Home
+            <a className="nav-link active me-3 text-white" aria-current="page" href="#">
+              Login
             </a>
-            <a className="nav-link me-3" href="#">
-              Movie
+            <a className="nav-link me-3 text-white" href="#">
+              Log Out
             </a>
-            <a className="nav-link me-3" href="#">
+            <a className="nav-link me-3 text-white" href="#">
               Favorite
             </a>
-            <a className="nav-link me-3" href="#">
+            <a className="nav-link me-3 text-white" href="#">
               Profile
             </a>
           </div>
@@ -66,8 +66,8 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
 
 // Validasi PropTypes
 Nav.propTypes = {
-  handleChangeSearch: PropTypes.func.isRequired, // Menambahkan validasi bahwa handleChangeSearch adalah fungsi
-  onSubmitSearch: PropTypes.func.isRequired, // Menambahkan validasi bahwa onSubmitSearch adalah fungsi
+  handleChangeSearch: PropTypes.func.isRequired,
+  onSubmitSearch: PropTypes.func.isRequired,
 };
 
 export default Nav;
