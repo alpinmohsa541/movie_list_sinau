@@ -1,5 +1,5 @@
 import Nav from "./components/Navbar/Navbar";
-import Main from "./components/Main/Main";
+import Slide from "./components/Slide/Slide";
 
 
 
@@ -8,7 +8,7 @@ const App = () => {
     <>
      <div className="">
         <Nav/>
-      <Main/>
+      <Slide/>
      </div>
     </>
   );

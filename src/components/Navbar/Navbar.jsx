@@ -28,7 +28,7 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
 
         {/* Search Bar */}
         <div className="d-flex justify-content-center w-100 mt-2">
-          <div className="d-flex align-items-center border rounded-2 border-2 border-black bg-transparent w-75">
+          <div className="d-flex align-items-center border rounded-2 border-2 border-white bg-transparent w-75">
             <input
               className="bg-transparent text-white border-0 w-100 p-2 placeholder-white"
               type="text"

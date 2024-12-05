@@ -3,7 +3,7 @@ import axios from "axios";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BsStar } from "react-icons/bs";
 
-function Main() {
+function Slide() {
   const [videos, setVideos] = useState([]);
   const [videoss, setVideoss] = useState([]);
   const [videosss, setVideosss] = useState([]);
@@ -196,4 +196,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Slide;
