@@ -61,7 +61,7 @@ const MovieList = () => {
         {movies.map((movie, index) => (
           <Col sm={3} key={index}>
             <MovieCard
-              title={movie.title}
+             className="text-center" title={movie.title}
               imageUrl={movie.imageUrl}
               rating={movie.rating}
               trailerUrl={movie.trailerUrl}
