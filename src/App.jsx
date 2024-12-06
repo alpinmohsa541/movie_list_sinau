@@ -2,6 +2,7 @@ import { useState } from 'react';  // Impor useState untuk mengelola state
 import Nav from "./components/Navbar/Navbar";
 import Slide from "./components/Slide/Slide";
 import MovieList from './components/MovieList/MovieList';
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');  // Menggunakan state untuk menyimpan nilai pencarian
@@ -24,6 +25,7 @@ const App = () => {
         <Nav handleChangeSearch={handleChangeSearch} onSubmitSearch={onSubmitSearch} />
         <Slide />
         <MovieList />
+        <Footer/>
       </div>
     </>
   );
