@@ -4,9 +4,6 @@ import MovieList from './components/MovieList/MovieList';
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
- 
- 
-
   return (
     <>
       <div>
