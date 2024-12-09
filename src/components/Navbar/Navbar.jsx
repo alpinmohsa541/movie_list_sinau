@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { AiOutlineSearch } from 'react-icons/ai';
+
 import Swal from 'sweetalert2'; // Import SweetAlert2
 import { useState } from 'react'; // Import useState untuk status login
-
-const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
+ 
+const Nav = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Status untuk melacak login
   const [isSignedUp, setIsSignedUp] = useState(false); // Status untuk melacak sign up
 
@@ -105,25 +105,8 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Search Bar */}
-        <div className="d-flex justify-content-center w-100 mt-2">
-          <div className="d-flex align-items-center border rounded-2 border-2 border-white bg-transparent w-75">
-            <input
-              className="bg-transparent text-white border-0 w-100 p-2 placeholder-white"
-              type="text"
-              placeholder="What do you want to watch?"
-              onChange={(e) => handleChangeSearch(e)}
-            />
-            <AiOutlineSearch
-              onClick={() => onSubmitSearch()}
-              size={25}
-              className="text-white hover:text-danger cursor-pointer ms-2"
-            />
-          </div>
-        </div>
-
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav d-flex w-100 justify-content-between">
+          <div className="navbar-nav ms-auto">  {/* Menambahkan ms-auto untuk menggeser ke kanan */}
             {/* Kondisi untuk Login, Sign Up, atau Sign Out */}
             {!isLoggedIn && !isSignedUp ? (
               <>
