@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import { AiOutlineSearch } from 'react-icons/ai';
 import Swal from 'sweetalert2'; // Import SweetAlert2
+import { useState } from 'react'; // Import useState untuk status login
 
 const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Status untuk melacak login
+  const [isSignedUp, setIsSignedUp] = useState(false); // Status untuk melacak sign up
+
   // Fungsi untuk menampilkan SweetAlert saat login
   const handleLogin = () => {
     Swal.fire({
@@ -19,8 +22,41 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
         if (username && password) {
           // Menampilkan alert success setelah login berhasil
           Swal.fire('Login Successful', 'You are logged in!', 'success');
+          setIsLoggedIn(true); // Menandakan bahwa pengguna telah login
+          setIsSignedUp(false); // Reset status sign up setelah login
         } else {
           Swal.fire('Error', 'Please enter valid credentials', 'error');
+        }
+      }
+    });
+  };
+
+  // Fungsi untuk menampilkan SweetAlert saat sign-up
+  const handleSignUp = () => {
+    Swal.fire({
+      title: 'Sign Up',
+      html: `
+        <input type="text" id="new-username" class="swal2-input" placeholder="Username" />
+        <input type="password" id="new-password" class="swal2-input" placeholder="Password" />
+        <input type="password" id="confirm-password" class="swal2-input" placeholder="Confirm Password" />
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        const newUsername = document.getElementById('new-username').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        if (newUsername && newPassword && confirmPassword) {
+          if (newPassword === confirmPassword) {
+            // Menampilkan alert success setelah sign-up berhasil
+            Swal.fire('Sign Up Successful', 'You have signed up!', 'success');
+            setIsSignedUp(true); // Menandakan bahwa pengguna telah sign up
+            setIsLoggedIn(false); // Set status login ke false karena perlu login lagi
+          } else {
+            Swal.fire('Error', 'Passwords do not match!', 'error');
+          }
+        } else {
+          Swal.fire('Error', 'Please fill in all fields', 'error');
         }
       }
     });
@@ -39,6 +75,8 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
       if (result.isConfirmed) {
         // Menampilkan alert success setelah sign out
         Swal.fire('Signed Out', 'You have been signed out!', 'success');
+        setIsLoggedIn(false); // Menandakan bahwa pengguna telah logout
+        setIsSignedUp(false); // Reset status sign up
       }
     });
   };
@@ -50,7 +88,7 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
           <img
             className="img-fluid"
             src="https://movielist-react-app.netlify.app/static/media/Logo.eeba5c17ddf85f2145e83dd963662921.svg"
-            alt="Brand Logo" 
+            alt="Brand Logo"
             width="150"
             height="auto"
           />
@@ -85,22 +123,44 @@ const Nav = ({ handleChangeSearch, onSubmitSearch }) => {
         </div>
 
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <a 
-              className="nav-link active me-3 text-white" 
-              aria-current="page" 
-              href="#"
-              onClick={handleLogin} // Menambahkan event untuk Login
-            >
-              Login
-            </a>
-            <a 
-              className="nav-link me-3 text-white" 
-              href="#"
-              onClick={handleSignOut} // Menambahkan event untuk Sign Out
-            >
-              Sign Out
-            </a>
+          <div className="navbar-nav d-flex w-100 justify-content-between">
+            {/* Kondisi untuk Login, Sign Up, atau Sign Out */}
+            {!isLoggedIn && !isSignedUp ? (
+              <>
+                <a 
+                  className="nav-link active me-3 text-white" 
+                  aria-current="page" 
+                  href="#"
+                  onClick={handleLogin} // Menambahkan event untuk Login
+                >
+                  Login
+                </a>
+                <a 
+                  className="nav-link me-3 text-white" 
+                  href="#"
+                  onClick={handleSignUp} // Menambahkan event untuk Sign Up
+                >
+                  Sign Up
+                </a>
+              </>
+            ) : isLoggedIn ? (
+              <a 
+                className="nav-link me-3 text-white " 
+                href="#"
+                onClick={handleSignOut} // Menambahkan event untuk Sign Out
+              >
+                Sign Out
+              </a>
+            ) : (
+              // Jika sudah sign-up tapi belum login, tidak ada tombol sign out
+              <a 
+                className="nav-link me-3 text-white" 
+                href="#"
+                onClick={handleLogin} // Arahkan ke login setelah sign-up
+              >
+                Login
+              </a>
+            )}
           </div>
         </div>
       </div>
