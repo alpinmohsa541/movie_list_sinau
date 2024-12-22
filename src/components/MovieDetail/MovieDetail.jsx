@@ -1,16 +1,20 @@
 // src/components/MovieDetail/MovieDetail.jsx
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Button } from 'react-bootstrap';
+import { useAuth } from '../Context/Context';
 
 const API_URL = "https://api.themoviedb.org/3";
 const API_KEY = "ae4dbdc73a2bf042cb271a0b322631d5";
 const unavailable = "https://www.movienewz.com/img/films/poster-holder.jpg";
 
 const MovieDetail = () => {
-  const { id } = useParams(); // Mengambil ID film dari URL
+  const { id } = useParams();
+  const { favorites, addFavorite, removeFavorite, isLoggedIn } = useAuth();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const isFavorite = favorites.some((fav) => fav.id === parseInt(id));
 
   useEffect(() => {
     const fetchMovieDetail = async () => {
@@ -46,6 +50,14 @@ const MovieDetail = () => {
     );
   }
 
+  const handleFavoriteToggle = () => {
+    if (isFavorite) {
+      removeFavorite(movie.id);
+    } else {
+      addFavorite(movie);
+    }
+  };
+
   return (
     <div className="container mt-5">
       <h1>{movie.title}</h1>
@@ -59,6 +71,14 @@ const MovieDetail = () => {
           <p><strong>Release Date:</strong> {movie.release_date}</p>
           <p><strong>Rating:</strong> {movie.vote_average}</p>
           <p><strong>Overview:</strong> {movie.overview}</p>
+          {isLoggedIn && (
+            <Button
+              variant={isFavorite ? 'danger' : 'primary'}
+              onClick={handleFavoriteToggle}
+            >
+              {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+            </Button>
+          )}
         </div>
       </div>
     </div>

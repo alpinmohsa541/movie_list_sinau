@@ -1,5 +1,6 @@
 import { useAuth } from '../Context/Context'; // Import hook useAuth
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom'; // Import Link untuk navigasi
 
 const Nav = () => {
   const { isLoggedIn, isSignedUp, handleLogin, handleSignUp, handleSignOut } = useAuth();
@@ -86,9 +87,14 @@ const Nav = () => {
                 </a>
               </>
             ) : isLoggedIn ? (
-              <a className="nav-link me-3 text-white" href="#" onClick={handleSignOut}>
-                Sign Out
-              </a>
+              <>
+                <Link className="nav-link me-3 text-white" to="/profile">
+                  Profile
+                </Link>
+                <a className="nav-link me-3 text-white" href="#" onClick={handleSignOut}>
+                  Sign Out
+                </a>
+              </>
             ) : (
               // Jika sudah sign-up tapi belum login, tidak ada tombol sign out
               <a className="nav-link me-3 text-white" href="#" onClick={triggerLogin}>
